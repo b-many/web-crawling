@@ -1,0 +1,24 @@
+{
+  "name": "contest-scraper-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "crawl": "node src/crawlers/index.js",
+    "crawl:linkareer": "node src/crawlers/index.js linkareer",
+    "crawl:campuspick": "node src/crawlers/index.js campuspick",
+    "crawl:wevity": "node src/crawlers/index.js wevity"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "better-sqlite3": "^9.6.0",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}

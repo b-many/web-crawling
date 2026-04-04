@@ -1,0 +1,15 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+  background: #f3f4f6;
+  color: #111827;
+}
+
+a { color: #2563eb; }
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 0;
+}

@@ -11,7 +11,7 @@
 import { createClient, parseDeadline, saveContests, sleep } from './utils.js';
 
 const BASE_URL   = 'https://linkareer.com';
-const GQL_URL    = `${BASE_URL}/api/graphql`;
+const GQL_URL    = 'https://api.linkareer.com/graphql';
 const PAGE_SIZE  = 20;
 
 // 링커리어 분야 태그 → 우리 DB category 매핑

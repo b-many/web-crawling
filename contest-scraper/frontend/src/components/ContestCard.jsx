@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 
 // ─── D-day 상태 분류 ─────────────────────────────────────────────────────────
 // ended  : days_left < 0   (마감됨)
@@ -101,7 +100,7 @@ function CategoryBadge({ category, ended }) {
 }
 
 // ─── 메인 카드 컴포넌트 ───────────────────────────────────────────────────────
-export default function ContestCard({ contest }) {
+export default function ContestCard({ contest, onClick }) {
   const status  = getStatus(contest.days_left);
   const isEnded  = status === 'ended';
   const isUrgent = status === 'urgent';
@@ -113,7 +112,7 @@ export default function ContestCard({ contest }) {
     flexDirection: 'column',
     gap: 10,
     transition: 'box-shadow 0.15s',
-    cursor: 'default',
+    cursor: onClick ? 'pointer' : 'default',
     ...CARD_STYLE[status],
   };
 
@@ -121,7 +120,7 @@ export default function ContestCard({ contest }) {
   const metaColor  = isEnded ? '#d1d5db' : '#6b7280';
 
   return (
-    <div style={cardStyle}>
+    <div style={cardStyle} onClick={onClick}>
       {/* 상단: 뱃지 줄 */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
         <CategoryBadge category={contest.category} ended={isEnded} />
@@ -131,19 +130,15 @@ export default function ContestCard({ contest }) {
 
       {/* 중단: 제목 + 메타 */}
       <div>
-        <Link
-          to={`/contests/${contest.id}`}
-          style={{
-            fontWeight: 600,
-            fontSize: 16,
-            color: titleColor,
-            textDecoration: 'none',
-            lineHeight: 1.4,
-            pointerEvents: isEnded ? 'none' : 'auto',
-          }}
-        >
+        <span style={{
+          fontWeight: 600,
+          fontSize: 16,
+          color: titleColor,
+          lineHeight: 1.4,
+          display: 'block',
+        }}>
           {contest.name}
-        </Link>
+        </span>
         <p style={{ margin: '4px 0 0', color: metaColor, fontSize: 13 }}>
           {contest.organizer} · 마감 {contest.deadline}
         </p>

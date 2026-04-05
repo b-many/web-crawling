@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getContests } from '../api/contests.js';
 import ContestCard from '../components/ContestCard.jsx';
+import ContestModal from '../components/ContestModal.jsx';
 import FilterBar from '../components/FilterBar.jsx';
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
   const [error, setError]             = useState(null);
   const [filters, setFilters]         = useState({ search: '', category: '', urgent: false });
   const [endedOpen, setEndedOpen]     = useState(false);
+  const [selectedContest, setSelectedContest] = useState(null);
 
   // API는 항상 전체를 가져오고, 분리·필터는 프론트에서 처리
   useEffect(() => {
@@ -38,6 +40,9 @@ export default function Home() {
 
   return (
     <div style={{ maxWidth: 820, margin: '0 auto', padding: '24px 16px' }}>
+      {selectedContest && (
+        <ContestModal contest={selectedContest} onClose={() => setSelectedContest(null)} />
+      )}
 
       {/* 헤더 */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
@@ -88,7 +93,9 @@ export default function Home() {
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {upcoming.map((c) => <ContestCard key={c.id} contest={c} />)}
+              {upcoming.map((c) => (
+                <ContestCard key={c.id} contest={c} onClick={() => setSelectedContest(c)} />
+              ))}
             </div>
           )}
 
@@ -127,7 +134,9 @@ export default function Home() {
 
               {endedOpen && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 12 }}>
-                  {ended.map((c) => <ContestCard key={c.id} contest={c} />)}
+                  {ended.map((c) => (
+                    <ContestCard key={c.id} contest={c} onClick={() => setSelectedContest(c)} />
+                  ))}
                 </div>
               )}
             </div>
